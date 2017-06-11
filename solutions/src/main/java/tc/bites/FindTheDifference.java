@@ -1,5 +1,6 @@
 package tc.bites;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,6 +19,30 @@ import java.util.Map;
  */
 public class FindTheDifference {
     public char findTheDifference(String s, String t) {
+        return findTheDifferenceFast(s, t);
+    }
+    private static final int SIZE = 26;
+    private static int[] count = new int[SIZE];
+    public char findTheDifferenceFast(String s, String t) {
+        Arrays.fill(count, 0);
+        int sL = s.length();
+        for (int i = 0; i < sL; ++i) {
+            int c = s.charAt(i) - 'a';
+            ++count[c];
+        }
+        int tL = t.length();
+        for (int i = 0; i < tL; ++i) {
+            char ct = t.charAt(i);
+            int c = ct - 'a';
+            if (count[c] < 1) {
+                return ct;
+            } else {
+                --count[c];
+            }
+        }
+        return 0;
+    }
+    public char findTheDifferenceGeneral(String s, String t) {
         char result = 0;
         Map<Character, Integer> sCnt = new HashMap<>();
         for (int i = 0; i < s.length(); ++i) {
