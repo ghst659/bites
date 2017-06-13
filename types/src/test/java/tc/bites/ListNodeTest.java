@@ -12,4 +12,10 @@ public class ListNodeTest {
         head.next = cadr;
         Assert.assertEquals(head.next.val, 4);
     }
+    @Test
+    public void testListCreation() {
+        ListNode head = ListNode.makeList(10, 11, 12, 13, 14);
+        String txt = head.toString();
+        Assert.assertEquals(txt, "10,11,12,13,14");
+    }
 }
