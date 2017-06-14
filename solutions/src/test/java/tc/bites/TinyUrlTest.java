@@ -17,12 +17,12 @@ import org.testng.annotations.Test;
 public class TinyUrlTest {
     @DataProvider(name="urlProvider")
     public Object[][] urlProvider() {
-        Object[][] result = {
+        Object[][] cases = {
             {"http://www.google.com"},
             {"http://www.google.com/"},
             {"http://www.yahoo.com/"},
         };
-        return result;
+        return cases;
     }
     @Test(dataProvider="urlProvider")
     public void testUrlCodec(String longUrl) {

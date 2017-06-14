@@ -20,14 +20,14 @@ import org.testng.annotations.Test;
 public class FindTheDifferenceTest {
     @DataProvider(name="dataProvider")
     public static Object[][] dataProvider() {
-        Object[][] result = {
+        Object[][] cases = {
             {"foo", "foot", 't'},
             {"foo", "oxfo", 'x'},
             {"abcd", "ebcda", 'e'},
             {"foo", "ofoo", 'o'},
             {"abcd", "aabcd", 'a'},
         };
-        return result;
+        return cases;
     }
 
     @Test(dataProvider="dataProvider")

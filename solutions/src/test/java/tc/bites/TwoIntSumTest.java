@@ -21,13 +21,13 @@ public class TwoIntSumTest {
 
     @DataProvider(name="dataProvider")
     public Object[][] dataProvider() {
-        Object[][] result = new Object[][] {
-                {new Integer(0), new Integer(0), new Integer(0)},
-                {new Integer(0), new Integer(1), new Integer(1)},
-                {new Integer(2), new Integer(5), new Integer(7)},
-                {new Integer(-1), new Integer(1), new Integer(0)},
-                {new Integer(-7), new Integer(4), new Integer(-3)}
+        Object[][] cases = {
+            {0, 0, 0},
+            {0, 1, 1},
+            {2, 5, 7},
+            {-1, 1, 0},
+            {-7, 4, -3}
         };
-        return result;
+        return cases;
     }
 }

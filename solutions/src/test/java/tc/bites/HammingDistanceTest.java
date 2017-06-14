@@ -1,6 +1,7 @@
 package tc.bites;
 
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 /**
@@ -18,22 +19,21 @@ import org.testng.annotations.Test;
  * The above arrows point to positions where the corresponding bits are different.
  */
 public class HammingDistanceTest {
-    @Test
-    public static void testHamming() {
-        int[][] cases = {
+    @Test(dataProvider="hamGen")
+    public void testHamming(int x, int y, int e) {
+        HammingDistance h = new HammingDistance();
+        int a = h.hammingDistance(x, y);
+        Assert.assertEquals(e, a);
+    }
+    @DataProvider(name="hamGen")
+    public Object[][] hamGen() {
+        Object[][] cases = {
             {1, 4, 2},
             {1, 1, 0},
             {1, 2, 2},
             {1, 3, 1},
             {31, 1, 4}
         };
-        HammingDistance h = new HammingDistance();
-        for (int[] xye: cases) {
-            int x = xye[0];
-            int y = xye[1];
-            int e = xye[2];
-            int a = h.hammingDistance(x, y);
-            Assert.assertEquals(e, a);
-        }
+        return cases;
     }
 }

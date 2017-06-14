@@ -24,12 +24,12 @@ public class ReverseStringTest {
 
     @DataProvider(name="dataProvider")
     public Object[][] dataProvider() {
-        Object[][] result = new Object[][] {
+        Object[][] cases = new Object[][] {
                 {"Cedric", "cirdeC"},
                 {"", ""},
                 {"M", "M"},
                 {"0123456789", "9876543210"}
         };
-        return result;
+        return cases;
     }
 }

@@ -21,27 +21,20 @@ public class FizzBuzzTest {
         this.solver = null;
     }
 
-    @Test(dataProvider="dataProvider")
+    @Test(dataProvider="fizzGen")
     public void testProblem(int a, List<String> expected) {
         List<String> result = this.solver.fizzBuzz(a);
         Assert.assertEquals(result, expected, "mismatch");
     }
-
-    @DataProvider(name="dataProvider")
-    public Object[][] dataProvider() {
-        Object[][] result = new Object[5][];
-        result[0] = dataRow(0);
-        result[1] = dataRow(1, "1");
-        result[2] = dataRow(2, "1", "2");
-        result[3] = dataRow(3, "1","2","Fizz");
-        result[4] = dataRow(15, "1","2","Fizz","4","Buzz","Fizz","7","8","Fizz","Buzz","11","Fizz","13","14","FizzBuzz");
-        return result;
-    }
-
-    private Object[] dataRow(int k, String...words) {
-        Object[] result = new Object[2];
-        result[0] = new Integer(k);
-        result[1] = Arrays.asList(words);
-        return result;
+    @DataProvider(name="fizzGen")
+    public Object[][] fizzGen() {
+        Object[][] cases = {
+            {0, Arrays.asList(new String[]{})},
+            {1, Arrays.asList(new String[]{"1"})},
+            {2, Arrays.asList(new String[]{"1", "2"})},
+            {3, Arrays.asList(new String[]{"1", "2", "Fizz"})},
+            {15, Arrays.asList(new String[]{"1","2","Fizz","4","Buzz","Fizz","7","8","Fizz","Buzz","11","Fizz","13","14","FizzBuzz"})}
+        };
+        return cases;
     }
 }

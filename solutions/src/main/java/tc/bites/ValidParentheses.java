@@ -6,7 +6,11 @@ import java.util.LinkedList;
 import java.util.Map;
 
 /**
- * Created by tsc on 1/17/17.
+ * Given a string containing just the characters
+ * '(', ')', '{', '}', '[' and ']', determine
+ * if the input string is valid.
+ * The brackets must close in the correct order,
+ * "()" and "()[]{}" are all valid but "(]" and "([)]" are not.
  */
 public class ValidParentheses {
     private static Map<Character,Character> CONJUGATE = new HashMap<>();
@@ -24,7 +28,8 @@ public class ValidParentheses {
         if (s != null) {
             result = true;
             Deque<Character> stack = new LinkedList<>();
-            for (int i = 0; result && i < s.length(); ++i) {
+            int sL = s.length();
+            for (int i = 0; result && i < sL; ++i) {
                 Character c = s.charAt(i);
                 if (CONJUGATE.containsKey(c)) {
                     stack.push(c);
@@ -36,7 +41,7 @@ public class ValidParentheses {
                     result = (e == c);
                 }
             }
-            if (stack.size()  != 0) {
+            if (stack.size() != 0) {
                 result = false;
             }
         }

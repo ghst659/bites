@@ -23,7 +23,7 @@ public class SearchForARangeTest {
     }
     @DataProvider(name="rangeData")
     public Object[][] rangeData() {
-        Object[][] result = {
+        Object[][] cases = {
             {new int[]{5, 7, 7, 8, 8, 10}, 8, new int[]{3, 4}},
             {new int[]{5, 7, 7, 8, 8, 10}, 9, new int[]{-1, -1}},
             {new int[]{10, 11, 12, 13}, 13, new int[]{3, 3}},
@@ -31,7 +31,7 @@ public class SearchForARangeTest {
             {new int[]{10, 11, 12, 13}, 11, new int[]{1, 1}},
             {new int[]{5, 5, 5}, 5, new int[]{0, 2}}
         };
-        return result;
+        return cases;
     }
     @Test
     public void testHiLo() {

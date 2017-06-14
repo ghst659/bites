@@ -45,7 +45,7 @@ public class MakeChangeTest {
 
     @DataProvider(name="dataProvider")
     public Object[][] dataProvider() {
-        Object[][] result = new Object[1][];
+        Object[][] cases = new Object[1][];
         List<Object[]> rows = new ArrayList<>();
         int[] denom = { 1, 5, 10, 25, 50, 100, 500, 1000, 2000, 5000, 10000};
         rows.add(dataRow(4, denom, new int[] {4}));
@@ -53,8 +53,8 @@ public class MakeChangeTest {
         rows.add(dataRow(125, denom, new int[] {0,0,0,1,0,1}));
         rows.add(dataRow(1, denom, new int[] {1}));
         rows.add(dataRow( 0, denom, new int[] {}));
-        result = rows.toArray(new Object[rows.size()][]);
-        return result;
+        cases = rows.toArray(new Object[rows.size()][]);
+        return cases;
     }
 
     private Object[] dataRow(int k, int[]denom, int[] expect) {
