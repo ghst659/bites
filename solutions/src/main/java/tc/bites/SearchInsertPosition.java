@@ -14,26 +14,19 @@ package tc.bites;
  */
 public class SearchInsertPosition {
     public int searchInsert(int[] nums, int target) {
-        int result = 0;
-        if (nums != null && nums.length > 0) {
-            int lo = 0;
-            int hi = nums.length - 1;
-            while (hi - lo > 1) {
-                int mid = (lo + hi) / 2;
-                if (nums[mid] > target) {
-                    hi = mid;
-                } else {
-                    lo = mid;
-                }
-            }
-            if (target <= nums[lo]) {
-                result = lo;
-            } else if (target <= nums[hi]) {
-                result = hi;
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+        int lo = 0;
+        int hi = nums.length - 1;
+        while (hi - lo > 1) {
+            int mid = (lo + hi) >> 1;
+            if (nums[mid] > target) {
+                hi = mid;
             } else {
-                result = hi + 1;
+                lo = mid;
             }
         }
-        return result;
+        return (target <= nums[lo]) ? lo : (target <= nums[hi]) ? hi : hi + 1;
     }
 }
