@@ -1,5 +1,6 @@
 package tc.bites;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,8 +15,11 @@ import java.util.Map;
  * and not a substring.
  */
 public class LongestSubstringNoRepeat {
-    private static Map<Character, Integer> pos = new HashMap<>();
     public int lengthOfLongestSubstring(String s) {
+        return lv1(s);
+    }
+    private static Map<Character, Integer> pos = new HashMap<>();
+    public int lv0(String s) {
         if (s == null || s.length() == 0) {
             return 0;
         }
@@ -35,11 +39,42 @@ public class LongestSubstringNoRepeat {
                 for (int i = first; i < newFirst; ++i) {
                     pos.remove(s.charAt(i));
                 }
-                pos.put(nextChar, next);
                 first = newFirst;
-            } else {
-                pos.put(nextChar, next);
             }
+            pos.put(nextChar, next);
+            last = next;
+            int curLen = last - first + 1;
+            if (curLen > maxLen) {
+                maxLen = curLen;
+            }
+        }
+        return maxLen;
+    }
+    private final static int SIZE = 512;
+    private static int[] seqPos = new int[SIZE];
+    public int lv1(String s) {
+        if (s == null || s.length() == 0) {
+            return 0;
+        }
+        Arrays.fill(seqPos, -1);
+        int maxIdx = s.length() - 1;
+        int maxLen = 1;
+        int first = 0;
+        int last = 0;
+        seqPos[s.charAt(first)] = first;
+        while (last < maxIdx) {
+            int next = last + 1;
+            Character nextChar = s.charAt(next);
+            if (seqPos[nextChar] >= 0) {
+                // we have a repeat
+                // restart the sequence after the repeat
+                int newFirst = seqPos[nextChar] + 1;
+                for (int i = first; i < newFirst; ++i) {
+                    seqPos[s.charAt(i)] = -1;
+                }
+                first = newFirst;
+            }
+            seqPos[nextChar] = next;
             last = next;
             int curLen = last - first + 1;
             if (curLen > maxLen) {
