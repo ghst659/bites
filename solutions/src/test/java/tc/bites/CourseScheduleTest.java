@@ -56,7 +56,12 @@ public class CourseScheduleTest {
                 new int[]{0,2},
                 new int[]{1,2},
                 new int[]{2,0}
-            }, false}
+            }, false},
+            {4, new int[][]{
+                new int[]{0,1},
+                new int[]{1,2},
+                new int[]{4,4}
+            }, true}
         };
         return cases;
     }
