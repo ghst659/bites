@@ -39,42 +39,39 @@ public class AssignCookies {
         Arrays.sort(g);
         Arrays.sort(s);
         int result = 0;
-        boolean done = false;
         int cookieLo = 0;
         int cookieHi = s.length - 1;
-        for (int curChild = 0; curChild < g.length && !done; ++curChild) {
+        for (int curChild = 0; curChild < g.length; ++curChild) {
             int foundCookie = findCookie(g[curChild], s, cookieLo, cookieHi);
             if (foundCookie < 0) {
-                done = true;
-            } else {
-                cookieLo = foundCookie + 1;
-                result += 1;
+                break;
             }
+            cookieLo = foundCookie + 1;
+            result++;
         }
         return result;
     }
     private int findCookie(int greed, int[] s, int siLo, int siHi) {
-        int found = 0;
         if (siLo > siHi || greed > s[siHi]) {
             return -1;
-        } else if (greed <= s[siLo]) {
+        }
+        if (greed <= s[siLo]) {
             return siLo;
-        } else {
-            while (siHi - siLo > 1) {
-                int mid = (siHi + siLo) / 2;
-                if (greed > s[mid]) {
-                    siLo = mid;
-                } else {
-                    siHi = mid;
-                }
-            }
-            if (s[siLo] < greed) {
-                return siHi;
+        }
+        while (siHi - siLo > 1) {
+            int mid = (siHi + siLo) / 2;
+            if (greed > s[mid]) {
+                siLo = mid;
             } else {
-                for (found = siLo; found > 0 && s[found-1] >= greed; --found) {
-                    // pass
-                }
+                siHi = mid;
             }
+        }
+        if (s[siLo] < greed) {
+            return siHi;
+        }
+        int found = siLo;
+        while (found > 0 && s[found - 1] >= greed) {
+            --found;
         }
         return found;
     }

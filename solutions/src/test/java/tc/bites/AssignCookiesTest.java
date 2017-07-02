@@ -53,7 +53,8 @@ public class AssignCookiesTest {
             {new int[]{3,3,3,3,3}, new int[]{1,3,3,3,4}, 4},
             {new int[]{3,3,3,3,3}, new int[]{3,3,3}, 3},
             {new int[]{5,5}, new int[]{2,2,2,2,2,2}, 0},
-            {new int[]{5,10}, new int[]{7}, 1}
+            {new int[]{5,10}, new int[]{7}, 1},
+            {new int[]{5, 5}, new int[]{2,3,5,5,5,5,5,5,7,8}, 2}
         };
         return cases;
     }
