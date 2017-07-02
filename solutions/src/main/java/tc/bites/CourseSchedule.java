@@ -58,10 +58,12 @@ public class CourseSchedule {
             }
         } else {
             possible.put(course, VisitState.WIP);
-            for (Integer pre: prereqs.get(course)) {
-                if (! checkCourse(pre)) {
-                    isPossible = false;
-                    break;
+            if (prereqs.containsKey(course)) {
+                for (Integer pre: prereqs.get(course)) {
+                    if (! checkCourse(pre)) {
+                        isPossible = false;
+                        break;
+                    }
                 }
             }
             possible.put(course, isPossible ? VisitState.POSSIBLE : VisitState.IMPOSSIBLE);
@@ -69,15 +71,12 @@ public class CourseSchedule {
         return isPossible;
     }
     private void studyPrereqs(int numCourses, int[][] prerequisites) {
-        for (int c = 0; c < numCourses; ++c) {
-            prereqs.put(c, new LinkedList<>());
-        }
         for (int[] pair: prerequisites) {
-            if (! prereqs.containsKey(pair[0])) {
-                prereqs.put(pair[0], new LinkedList<>());
+            int course = pair[0];
+            if (! prereqs.containsKey(course)) {
+                prereqs.put(course, new LinkedList<>());
             }
-            List<Integer> keyPrereqs = prereqs.get(pair[0]);
-            keyPrereqs.add(pair[1]);
+            prereqs.get(course).add(pair[1]);
         }
     }
 }
