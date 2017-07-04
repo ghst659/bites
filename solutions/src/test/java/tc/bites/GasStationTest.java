@@ -33,7 +33,8 @@ public class GasStationTest {
             {new int[]{2, 0}, new int[]{1, 1}, 0},
             {new int[]{2, 0}, new int[]{1, 2}, -1},
             {new int[]{1, 0, 2}, new int[]{1, 1, 1}, 2},
-            {new int[]{1, 0, 2, 1}, new int[]{1, 1, 1, 1}, 2}
+            {new int[]{1, 0, 2, 1}, new int[]{1, 1, 1, 1}, 2},
+            {new int[]{1, 1, 0, 2}, new int[]{1, 1, 1, 1}, 3}
         };
         return cases;
     }
