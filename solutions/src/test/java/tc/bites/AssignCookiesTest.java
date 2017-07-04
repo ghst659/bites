@@ -38,7 +38,7 @@ public class AssignCookiesTest {
     public void testAssignCookies(int[] g, int[] s, int expected) {
         AssignCookies sol = new AssignCookies();
         int actual = sol.findContentChildren(g, s);
-        Assert.assertEquals(actual, expected, String.format("%s %s", Aux.aiStr(g), Aux.aiStr(s)));
+        Assert.assertEquals(actual, expected, String.format("%s %s", Aux.axStr(g), Aux.axStr(s)));
     }
     @DataProvider(name="cookieGen")
     public Object[][] cookieGen() {

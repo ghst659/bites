@@ -63,7 +63,7 @@ public class CourseScheduleTest {
         return cases;
     }
     private String aaiStr(int[][] aai) {
-        String r = Aux.axStr(aai, (int[] ai)->Aux.aiStr(ai));
+        String r = Aux.axStr(aai, (int[] ai)->Aux.axStr(ai));
         return r;
     }
 }

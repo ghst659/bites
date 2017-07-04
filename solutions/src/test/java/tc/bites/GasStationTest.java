@@ -21,7 +21,7 @@ public class GasStationTest {
     public void testRoute(int[] gas, int[] cost, int expected) {
         GasStation sut = new GasStation();
         int actual = sut.canCompleteCircuit(gas, cost);
-        Assert.assertEquals(actual, expected, String.format("%s %s", Aux.aiStr(gas), Aux.aiStr(cost)));
+        Assert.assertEquals(actual, expected, String.format("%s %s", Aux.axStr(gas), Aux.axStr(cost)));
     }
     @DataProvider(name="routeGen")
     public Object[][] routeGen() {
