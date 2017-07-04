@@ -38,7 +38,7 @@ public class AssignCookiesTest {
     public void testAssignCookies(int[] g, int[] s, int expected) {
         AssignCookies sol = new AssignCookies();
         int actual = sol.findContentChildren(g, s);
-        Assert.assertEquals(actual, expected, String.format("%s %s %d", aStr(g), aStr(s), expected));
+        Assert.assertEquals(actual, expected, String.format("%s %s", Aux.aiStr(g), Aux.aiStr(s)));
     }
     @DataProvider(name="cookieGen")
     public Object[][] cookieGen() {
@@ -57,16 +57,5 @@ public class AssignCookiesTest {
             {new int[]{5, 5}, new int[]{2,3,5,5,5,5,5,5,7,8}, 2}
         };
         return cases;
-    }
-    private String aStr(int[] a) {
-        StringBuilder buf = new StringBuilder("[");
-        for (int i = 0; i < a.length; ++i) {
-            if (i > 0) {
-                buf.append(",");
-            }
-            buf.append(Integer.toString(a[i]));
-        }
-        buf.append("]");
-        return buf.toString();
     }
 }

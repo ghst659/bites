@@ -4,9 +4,6 @@ import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import java.util.Arrays;
-import java.util.function.Function;
-
 /**
  * There are a total of n courses you have to take, labeled from 0 to n - 1.
  * Some courses may have prerequisites, for example
@@ -66,25 +63,7 @@ public class CourseScheduleTest {
         return cases;
     }
     private String aaiStr(int[][] aai) {
-        String r = aStr(aai, (int[] ai)->aiStr(ai));
+        String r = Aux.axStr(aai, (int[] ai)->Aux.aiStr(ai));
         return r;
-    }
-    private String aiStr(int[] ai) {
-        Integer[] aI = Arrays.stream(ai).boxed().toArray(Integer[]::new);
-        String r = aStr(aI, (n)->Integer.toString(n));
-        return r;
-    }
-    private <T> String aStr(T[] a, Function<T,String> toStr) {
-        StringBuffer buf = new StringBuffer("[");
-        if (a != null && a.length > 0) {
-            for (int i = 0; i < a.length; ++i) {
-                if (i > 0) {
-                    buf.append(",");
-                }
-                buf.append(toStr.apply(a[i]));
-            }
-        }
-        buf.append("]");
-        return buf.toString();
     }
 }
