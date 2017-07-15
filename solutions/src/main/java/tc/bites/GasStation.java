@@ -1,5 +1,8 @@
 package tc.bites;
 
+import java.util.Arrays;
+import java.util.function.Function;
+
 /**
  * There are N gas stations along a circular route,
  * where the amount of gas at station i is gas[i].
@@ -16,7 +19,34 @@ public class GasStation {
     public int canCompleteCircuit(int[] gas, int[] cost) {
         return n2(gas,cost);
     }
-
+    private int n(int[] gas, int[] cost) {
+        int L = gas.length;
+        if (L < 2) {
+            return 0;
+        }
+        int[] tank = new int[L];
+        tank[0] = gas[0] - cost[0];
+        for (int pos = 0; pos < L; ++pos) {
+            tank[pos] = (pos == 0 ? 0 : tank[pos-1]) + gas[pos] - cost[pos];
+        }
+        int minPos = 0;
+        int maxTank = tank[0];
+        int minTank = tank[0];
+        for (int pos = 0; pos < L; ++pos) {
+            if (tank[pos] > maxTank) {
+                maxTank = pos;
+            }
+            if (tank[pos] < minTank) {
+                minTank = tank[pos];
+                minPos = pos;
+            }
+        }
+        int result = (minTank >= 0 ? minPos : -1);
+        System.err.println(String.format("%s %s -> %s -> %d",
+            Arrays.toString(gas), Arrays.toString(cost),
+            Arrays.toString(tank), result));
+        return result;
+    }
     /**
      * N-squared initial solution.
      */
@@ -37,5 +67,15 @@ public class GasStation {
             }
         }
         return -1;
+    }
+    private <T, R> R caller(Function<T,R> f, T a) {
+        return f.apply(a);
+    }
+    private void syntax() {
+        Integer a = 3;
+        Integer b = 5;
+        String s = caller((x)->x.toString(), a);
+        String t = caller(Integer::toBinaryString, a);
+        Integer u = caller(a::compareTo, b);
     }
 }
