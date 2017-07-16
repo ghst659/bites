@@ -1,5 +1,8 @@
 package tc.bites;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * You are given a map in form of a two-dimensional integer grid
  * where 1 represents land and 0 represents water.
@@ -20,7 +23,52 @@ package tc.bites;
  * https://leetcode.com/static/images/problemset/island.png
  */
 public class IslandPerimeter {
+    private static final int[] DELTAS = new int[]{-1, 1};
     public int islandPerimeter(int[][] grid) {
-        return 16;
+        Set<Integer> visited = new HashSet<>();
+        int[] startCell = findStart(grid);
+        int perimeter = findPerimeter(visited, grid, startCell[0], startCell[1]);
+        return perimeter;
+    }
+    private int findPerimeter(Set<Integer> visited, int[][] grid, int row, int col) {
+        int perimeter = 0;
+        if (grid[row][col] != 0) {
+            visited.add(cantor(row, col));
+            for (int dr: DELTAS) {
+                int r = row + dr;
+                if (r < 0 || r >= grid.length) {
+                    perimeter += 1;
+                } else if (grid[r][col] == 0) {
+                    perimeter += 1;
+                } else if (! visited.contains(cantor(r, col))) {
+                    perimeter += findPerimeter(visited, grid, r, col);
+                }
+            }
+            for (int dc: DELTAS) {
+                int c = col + dc;
+                if (c < 0 || c >= grid[0].length) {
+                    perimeter += 1;
+                } else if (grid[row][c] == 0) {
+                    perimeter += 1;
+                } else if (! visited.contains(cantor(row, c))) {
+                    perimeter += findPerimeter(visited, grid, row, c);
+                }
+            }
+        }
+        return perimeter;
+    }
+    private int cantor(int k1, int k2) {
+        int result = (k1 + k2) * (k1 + k2 + 1) / 2 + k2;
+        return result;
+    }
+    private int[] findStart(int[][] grid) {
+        for (int row = 0; row < grid.length; ++row) {
+            for (int col = 0; col < grid[row].length; ++col) {
+                if (grid[row][col] != 0) {
+                    return new int[]{row, col};
+                }
+            }
+        }
+        return null;
     }
 }
