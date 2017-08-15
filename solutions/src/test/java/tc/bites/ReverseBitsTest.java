@@ -31,4 +31,17 @@ public class ReverseBitsTest {
         };
         return cases;
     }
+
+    @Test
+    public void testSpeed() {
+        ReverseBits s = new ReverseBits();
+        int MAXI = 1 << 27;
+        int sum = 0;
+        long t0 = System.currentTimeMillis();
+        for (int i = 0; i < MAXI; ++i) {
+            sum |= s.reverseBits(i);
+        }
+        long t1 = System.currentTimeMillis();
+        System.err.format("dt = %d, sum = %d\n", t1 - t0, sum);
+    }
 }
