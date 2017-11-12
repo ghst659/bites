@@ -5,7 +5,12 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-
+/**
+ * Calculate the sum of two integers a and b,
+ * but you are not allowed to use the operator + and -.
+ * Example:
+ * Given a = 1 and b = 2, return 3.
+ */
 public class TwoIntSumTest {
     private TwoIntSum cut = null;
     @BeforeMethod public void setUp() { this.cut = new TwoIntSum(); }
