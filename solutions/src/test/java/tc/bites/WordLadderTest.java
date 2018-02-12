@@ -32,19 +32,37 @@ public class WordLadderTest {
     public void testWordLadder(String beginWord, String endWord, String[] wordAry, int expected) {
         List<String> wordList = new LinkedList<>();
         wordList.addAll(Arrays.asList(wordAry));
+        long t0 = System.currentTimeMillis();
         int ladderLen = sut.ladderLength(beginWord, endWord, wordList);
+        long t1 = System.currentTimeMillis();
         Assert.assertEquals(ladderLen, expected);
+        System.err.format("time: %d\n", t1 - t0);
     }
-
     @DataProvider(name = "wordLadderGen")
     public Object[][] wordLadderGen() {
         Object[][] result = {
-            {"hit", "cog", new String[]{"hot", "dot", "dog", "lot", "log", "cog"}, 5}
+            {"hit", "cog", new String[]{"hot", "dot", "dog", "lot", "log", "cog"}, 5},
+            {"car", "fig", new String[]{
+                "bar", "mix", "hat", "mar", "her", "fur", "fig", "fir", "tar", "but", "cut",
+                "mat", "fix", "tix", "box", "bet", "met", "get", "let", "net", "not", "nut",
+                "jot", "jar", "cot", "tax", "tan", "man", "ban", "can", "ken", "new", "men",
+                "son", "nom", "non", "ton", "hot", "bot", "tri", "cog", "dog", "dig", "dim",
+                "fog", "got", "god", "sog", "sow", "bow", "vow", "vim", "rot", "row", "run",
+                "bun", "fun", "far", "fin", "tin", "sin", "min"
+            }, 4},
+            {"car", "nut", new String[]{
+                "bar", "mix", "hat", "mar", "her", "fur", "fig", "fir", "tar", "but", "cut",
+                "mat", "fix", "tix", "box", "bet", "met", "get", "let", "net", "not", "nut",
+                "jot", "jar", "cot", "tax", "tan", "man", "ban", "can", "ken", "new", "men",
+                "son", "nom", "non", "ton", "hot", "bot", "tri", "cog", "dog", "dig", "dim",
+                "fog", "got", "god", "sog", "sow", "bow", "vow", "vim", "rot", "row", "run",
+                "bun", "fun", "far", "fin", "tin", "sin", "min", "max", "tax", "fax", "far"
+            }, 6}
         };
         return result;
     }
 
-    // @Test(dataProvider = "neighbourGen")
+    @Test(dataProvider = "neighbourGen")
     public void testNeighbours(String[]wordList, String word, String[]neighbours) {
         WordLadder.bucketise(Arrays.asList(wordList));
         Set<String> expected = new HashSet<>();
