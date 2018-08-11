@@ -26,15 +26,17 @@ public class GasStationTest {
     @DataProvider(name="routeGen")
     public Object[][] routeGen() {
         Object[][] cases = {
-            {new int[]{0}, new int[]{1}, 0},
-            {new int[]{0}, new int[]{0}, 0},
-            {new int[]{1, 1}, new int[]{1, 1}, 0},
-            {new int[]{1, 0}, new int[]{1, 1}, -1},
-            {new int[]{2, 0}, new int[]{1, 1}, 0},
-            {new int[]{2, 0}, new int[]{1, 2}, -1},
-            {new int[]{1, 0, 2}, new int[]{1, 1, 1}, 2},
-            {new int[]{1, 0, 2, 1}, new int[]{1, 1, 1, 1}, 2},
-            {new int[]{1, 1, 0, 2}, new int[]{1, 1, 1, 1}, 3}
+                {new int[]{0}, new int[]{0}, 0},
+                {new int[]{1, 0}, new int[]{1, 1}, -1},
+                {new int[]{2, 0}, new int[]{1, 1}, 0},
+                {new int[]{2, 0}, new int[]{1, 2}, -1},
+                {new int[]{1, 0, 2}, new int[]{1, 1, 1}, 2},
+                {new int[]{1, 0, 2, 1}, new int[]{1, 1, 1, 1}, 2},
+                {new int[]{1, 1, 0, 2}, new int[]{1, 1, 1, 1}, 3},
+                {new int[]{1, 2, 3, 4, 5}, new int[]{3, 4, 5, 1, 2}, 3},
+                {new int[]{2, 3, 4}, new int[]{3, 4, 3}, -1},
+                {new int[]{3, 1, 1}, new int[]{1, 2, 2}, 0},
+                {new int[]{1, 2, 3, 4, 5, 5, 70}, new int[]{2, 3, 4, 3, 9, 6, 2}, 6}
         };
         return cases;
     }

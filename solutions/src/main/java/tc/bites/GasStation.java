@@ -17,65 +17,20 @@ import java.util.function.Function;
  */
 public class GasStation {
     public int canCompleteCircuit(int[] gas, int[] cost) {
-        return n2(gas,cost);
-    }
-    private int n(int[] gas, int[] cost) {
-        int L = gas.length;
-        if (L < 2) {
-            return 0;
-        }
-        int[] tank = new int[L];
-        tank[0] = gas[0] - cost[0];
-        for (int pos = 0; pos < L; ++pos) {
-            tank[pos] = (pos == 0 ? 0 : tank[pos-1]) + gas[pos] - cost[pos];
-        }
-        int minPos = 0;
-        int maxTank = tank[0];
-        int minTank = tank[0];
-        for (int pos = 0; pos < L; ++pos) {
-            if (tank[pos] > maxTank) {
-                maxTank = pos;
-            }
-            if (tank[pos] < minTank) {
-                minTank = tank[pos];
-                minPos = pos;
+        int result = -1;
+        int min_i = 0;
+        int min_total = Integer.MAX_VALUE;
+        int total = 0;
+        for (int i = 0; i < gas.length; ++i) {
+            total += gas[i] - cost[i];
+            if (total < min_total) {
+                min_total = total;
+                min_i = i;
             }
         }
-        int result = (minTank >= 0 ? minPos : -1);
-        System.err.println(String.format("%s %s -> %s -> %d",
-            Arrays.toString(gas), Arrays.toString(cost),
-            Arrays.toString(tank), result));
+        if (total >= 0) {
+            result = (min_i + 1) % gas.length;
+        }
         return result;
-    }
-    /**
-     * N-squared initial solution.
-     */
-    private int n2(int[] gas, int[] cost) {
-        int L = gas.length;
-        if (L < 2) {
-            return 0;
-        }
-        for (int startPos = 0; startPos < L; ++startPos) {
-            boolean canComplete = true;
-            int tank = 0;
-            for (int step = 0; tank >= 0 && step < L; ++step) {
-                int pos = (startPos + step) % L;
-                tank += (gas[pos] - cost[pos]);
-            }
-            if (tank >= 0) {
-                return startPos;
-            }
-        }
-        return -1;
-    }
-    private <T, R> R caller(Function<T,R> f, T a) {
-        return f.apply(a);
-    }
-    private void syntax() {
-        Integer a = 3;
-        Integer b = 5;
-        String s = caller((x)->x.toString(), a);
-        String t = caller(Integer::toBinaryString, a);
-        Integer u = caller(a::compareTo, b);
     }
 }
